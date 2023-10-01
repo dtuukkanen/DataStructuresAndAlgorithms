@@ -29,10 +29,10 @@ class HashBucket:
 
         # If not, use overflow
         else:
-            for i in range(self.M - 1, 0, -1):
+            for i in range(self.M - 1, -1, -1):
                 if self.overflow[i] is None or self.overflow[i] == data:
                     self.overflow[i] = data
-                    break
+                    return
 
     def delete(self, data):
         bucket = self.hash(data)
@@ -65,6 +65,7 @@ class HashBucket:
             if overflow_index is not None:
                 for i in range(overflow_index, 0, -1):
                     self.overflow[i] = self.overflow[i - 1]
+                self.overflow[0] = None
 
     def print(self):
         # Hashtable
@@ -73,7 +74,7 @@ class HashBucket:
                 print(self.T[i], end=" ")
 
         # Overflow
-        for i in range(self.M - 1, 0, -1):
+        for i in range(self.M - 1, -1, -1):
             if self.overflow[i] is not None:
                 print(self.overflow[i], end=" ")
         print()
