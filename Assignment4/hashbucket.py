@@ -17,15 +17,13 @@ class HashBucket:
         bucket = self.hash(data)
 
         # Create index
-        index = bucket * 2
+        index = bucket * (self.M // self.B)
 
-        # Check if the index is empty or already has the data
-        if self.T[index] is None or self.T[index] == data:
-            self.T[index] = data
-
-        # Check if other index in bucket is free to use
-        elif self.T[index + 1] is None or self.T[index + 1] == data:
-            self.T[index + 1] = data
+        for i in range(index, index + (self.M // self.B)):
+            # Check if the index is empty or already has the data
+            if self.T[i] is None or self.T[i] == data:
+                self.T[i] = data
+                return
 
         # If not, use overflow
         else:
@@ -38,15 +36,13 @@ class HashBucket:
         bucket = self.hash(data)
 
         # Create index
-        index = bucket * 2
+        index = bucket * (self.M // self.B)
 
-        # Check if the index has the data
-        if self.T[index] == data:
-            self.T[index] = None
-
-        # If not, check the other index in the bucket
-        elif self.T[index + 1] == data:
-            self.T[index + 1] = None
+        for i in range(index, index + (self.M // self.B)):
+            # Check if the index has the data
+            if self.T[i] == data:
+                self.T[i] = None
+                return
 
         # If not, find the next position that might have the data
         else:
