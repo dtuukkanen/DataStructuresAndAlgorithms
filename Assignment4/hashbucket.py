@@ -26,11 +26,10 @@ class HashBucket:
                 return
 
         # If not, use overflow
-        else:
-            for i in range(self.M - 1, -1, -1):
-                if self.overflow[i] is None or self.overflow[i] == data:
-                    self.overflow[i] = data
-                    return
+        for i in range(self.M - 1, -1, -1):
+            if self.overflow[i] is None or self.overflow[i] == data:
+                self.overflow[i] = data
+                return
 
     def delete(self, data):
         bucket = self.hash(data)
@@ -44,24 +43,22 @@ class HashBucket:
                 self.T[i] = None
                 return
 
-        # If not, find the next position that might have the data
-        else:
-            # If not, check overflow
-            overflow_index = None
+        # If not, check overflow
+        overflow_index = None
 
+        # Search for data in overflow
+        # And save the index if found
+        for i in range(self.M):
             # Search for data in overflow
-            # And save the index if found
-            for i in range(self.M):
-                # Search for data in overflow
-                if self.overflow[i] == data:
-                    overflow_index = i
-                    break
+            if self.overflow[i] == data:
+                overflow_index = i
+                break
 
-            # If data is found, delete it
-            if overflow_index is not None:
-                for i in range(overflow_index, 0, -1):
-                    self.overflow[i] = self.overflow[i - 1]
-                self.overflow[0] = None
+        # If data is found, delete it
+        if overflow_index is not None:
+            for i in range(overflow_index, 0, -1):
+                self.overflow[i] = self.overflow[i - 1]
+            self.overflow[0] = None
 
     def print(self):
         # Hashtable
