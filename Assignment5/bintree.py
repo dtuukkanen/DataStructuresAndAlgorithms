@@ -1,3 +1,4 @@
+# Assignment 5.1
 class Node:
     def __init__(self, key):
         self.key = key
@@ -8,6 +9,7 @@ class Node:
 class BST:
     def __init__(self):
         self.root = None
+        self.mirrored = False
 
     # Insert
     def __inserthelp(self, node, key):
@@ -19,8 +21,20 @@ class BST:
             node.right = self.__inserthelp(node.right, key)
         return node
 
+    def __inserthelpmirrored(self, node, key):
+        if node is None:
+            return Node(key)
+        elif node.key > key:
+            node.right = self.__inserthelpmirrored(node.right, key)
+        elif node.key < key:
+            node.left = self.__inserthelpmirrored(node.left, key)
+        return node
+
     def insert(self, key):
-        self.root = self.__inserthelp(self.root, key)
+        if self.mirrored:
+            self.root = self.__inserthelpmirrored(self.root, key)
+        else:
+            self.root = self.__inserthelp(self.root, key)
 
     # Search
     def __searchhelp(self, node, key):
@@ -32,8 +46,20 @@ class BST:
             return self.__searchhelp(node.right, key)
         return True
 
+    def __searchhelpmirrored(self, node, key):
+        if node is None:
+            return False
+        elif node.key > key:
+            return self.__searchhelpmirrored(node.right, key)
+        elif node.key < key:
+            return self.__searchhelpmirrored(node.left, key)
+        return True
+
     def search(self, key):
-        return self.__searchhelp(self.root, key)
+        if self.mirrored:
+            return self.__searchhelpmirrored(self.root, key)
+        else:
+            return self.__searchhelp(self.root, key)
 
     # Remove
     def __getmax(self, node):
@@ -41,10 +67,21 @@ class BST:
             return node.key
         return self.__getmax(node.right)
 
+    def __getmaxmirrored(self, node):
+        if node.left is None:
+            return node.key
+        return self.__getmaxmirrored(node.left)
+
     def __removemax(self, node):
         if node.right is None:
             return node.left
         node.right = self.__removemax(node.right)
+        return node
+
+    def __removemaxmirrored(self, node):
+        if node.left is None:
+            return node.right
+        node.left = self.__removemaxmirrored(node.left)
         return node
 
     def __removehelp(self, node, key):
@@ -64,8 +101,28 @@ class BST:
                 node.left = self.__removemax(node.left)
         return node
 
+    def __removehelpmirrored(self, node, key):
+        if node is None:
+            return node
+        elif node.key > key:
+            node.right = self.__removehelpmirrored(node.right, key)
+        elif node.key < key:
+            node.left = self.__removehelpmirrored(node.left, key)
+        else:
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+            else:
+                node.key = self.__getmaxmirrored(node.right)
+                node.right = self.__removemaxmirrored(node.right)
+        return node
+
     def remove(self, key):
-        self.root = self.__removehelp(self.root, key)
+        if self.mirrored:
+            self.root = self.__removehelpmirrored(self.root, key)
+        else:
+            self.root = self.__removehelp(self.root, key)
 
     # Printing
     def __visit(self, node):
@@ -82,6 +139,7 @@ class BST:
         self.__preorder(self.root)
         print()
 
+    # Assignment 5.2
     def __inorder(self, node):
         if node is None:
             return
@@ -120,6 +178,21 @@ class BST:
         self.__breadthfirst(self.root)
         print()
 
+    # Assignment 5.3
+    def __mirror(self, node):
+        if node is None:
+            return
+        self.__mirror(node.left)
+        self.__mirror(node.right)
+        node.left, node.right = node.right, node.left
+
+    def mirror(self):
+        self.__mirror(self.root)
+        if self.mirrored:
+            self.mirrored = False
+        else:
+            self.mirrored = True
+
 
 if __name__ == "__main__":
     Tree = BST()
@@ -128,6 +201,13 @@ if __name__ == "__main__":
     for key in keys:
         Tree.insert(key)
 
-    Tree.postorder()        # 2 4 3 1 6 7 9 5
-    Tree.inorder()          # 1 2 3 4 5 6 7 9
-    Tree.breadthfirst()     # 5 1 9 3 7 2 4 6
+    Tree.preorder()         # 5 1 3 2 4 9 7 6
+    Tree.mirror()
+    Tree.preorder()         # 5 9 7 6 1 3 4 2
+
+    Tree.insert(8)
+    Tree.remove(3)
+    print(Tree.search(2))   # True
+    Tree.preorder()         # 5 9 7 8 6 1 2 4
+    Tree.mirror()
+    Tree.preorder()         # 5 1 2 4 9 7 6 8
