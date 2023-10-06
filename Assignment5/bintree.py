@@ -68,15 +68,56 @@ class BST:
         self.root = self.__removehelp(self.root, key)
 
     # Printing
+    def __visit(self, node):
+        print(node.key, end=" ")
+
     def __preorder(self, node):
         if node is None:
             return
-        print(node.key, end=" ")
+        self.__visit(node)
         self.__preorder(node.left)
         self.__preorder(node.right)
 
     def preorder(self):
         self.__preorder(self.root)
+        print()
+
+    def __inorder(self, node):
+        if node is None:
+            return
+        self.__inorder(node.left)
+        self.__visit(node)
+        self.__inorder(node.right)
+
+    def inorder(self):
+        self.__inorder(self.root)
+        print()
+
+    def __postorder(self, node):
+        if node is None:
+            return
+        self.__postorder(node.left)
+        self.__postorder(node.right)
+        self.__visit(node)
+
+    def postorder(self):
+        self.__postorder(self.root)
+        print()
+
+    def __breadthfirst(self, node):
+        if node is None:
+            return
+        queue = [node]
+        while len(queue) > 0:
+            node = queue.pop(0)
+            self.__visit(node)
+            if node.left is not None:
+                queue.append(node.left)
+            if node.right is not None:
+                queue.append(node.right)
+
+    def breadthfirst(self):
+        self.__breadthfirst(self.root)
         print()
 
 
@@ -87,14 +128,6 @@ if __name__ == "__main__":
     for key in keys:
         Tree.insert(key)
 
-    Tree.preorder()         # 5 1 3 2 4 9 7 6
-
-    print(Tree.search(6))   # True
-    print(Tree.search(8))   # False
-
-    Tree.remove(1)
-    Tree.preorder()         # 5 3 2 4 9 7 6
-    Tree.remove(9)
-    Tree.preorder()         # 5 3 2 4 7 6
-    Tree.remove(3)
-    Tree.preorder()         # 5 2 4 7 6
+    Tree.postorder()        # 2 4 3 1 6 7 9 5
+    Tree.inorder()          # 1 2 3 4 5 6 7 9
+    Tree.breadthfirst()     # 5 1 9 3 7 2 4 6
