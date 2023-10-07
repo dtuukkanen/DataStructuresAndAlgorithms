@@ -21,6 +21,7 @@ class BST:
             node.right = self.__inserthelp(node.right, key)
         return node
 
+    # Assignment 5.3
     def __inserthelpmirrored(self, node, key):
         if node is None:
             return Node(key)
@@ -46,6 +47,7 @@ class BST:
             return self.__searchhelp(node.right, key)
         return True
 
+    # Assignment 5.3
     def __searchhelpmirrored(self, node, key):
         if node is None:
             return False
@@ -67,6 +69,7 @@ class BST:
             return node.key
         return self.__getmax(node.right)
 
+    # Assignment 5.3
     def __getmaxmirrored(self, node):
         if node.left is None:
             return node.key
@@ -78,6 +81,7 @@ class BST:
         node.right = self.__removemax(node.right)
         return node
 
+    # Assignment 5.3
     def __removemaxmirrored(self, node):
         if node.left is None:
             return node.right
@@ -101,6 +105,7 @@ class BST:
                 node.left = self.__removemax(node.left)
         return node
 
+    # Assignment 5.3
     def __removehelpmirrored(self, node, key):
         if node is None:
             return node
