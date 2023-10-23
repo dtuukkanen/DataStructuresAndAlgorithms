@@ -39,18 +39,16 @@ class AVL:
         elif key > root.key:
             root.right = self.insert_help(root.right, key)
             if not self.is_balanced:                           # Check for possible rotations
-                if root.balance >= 0:                       # No Rotations needed, update balance variables
-                    self.is_balanced = root.balance == 1
-                    root.balance -= 1
+                if root.balance <= 0:                       # No Rotations needed, update balance variables
+                    self.is_balanced = root.balance == -1
+                    root.balance += 1
                 # Rotation(s) needed
                 else:
-                    if root.right.balance == -1:
-                        root = self.left_rotation(root)    # Single rotation
+                    if root.right.balance == 1:
+                        root = self.left_rotation(root)
                     else:
-                        root = self.right_left_rotation(
-                            root)   # Double rotation
+                        root = self.right_left_rotation(root)
                     self.is_balanced = True
-
         return root
 
     # Single rotation: right rotation around root
