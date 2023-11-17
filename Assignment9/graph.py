@@ -7,8 +7,8 @@ class Visited(Enum):
 
 
 class Queue:
-    def __init__(self, size):
-        self.queue = [] * size
+    def __init__(self):
+        self.queue = []
 
     def enqueue(self, item):
         self.queue.append(item)
@@ -47,36 +47,36 @@ class Graph:
     def dft(self, start):
         for v in range(self.node_count()):  # Initialize
             self.set_value(v, Visited.UNVISITED)
-        for v in range(self.node_count()):  # Traverse
-            if self.get_value(v) != Visited.VISITED:
-                self.dft_helper(v)
+
+        # Start at the start node
+        self.dft_helper(start)
         print()
 
     def bft(self, start):
         for v in range(self.node_count()):  # Initialize
             self.set_value(v, Visited.UNVISITED)
-        for v in range(self.node_count()):  # Traverse
-            if self.get_value(v) != Visited.VISITED:
-                self.bft_helper(v)
+
+        # Start at the start node
+        self.bft_helper(start)
         print()
 
     # Helper methods
     def dft_helper(self, v):
         self.pre_visit(v)
         self.set_value(v, Visited.VISITED)
-        for n in self.neighbors(v):
+        for n in sorted(self.neighbors(v)):
             if self.get_value(n) != Visited.VISITED:
                 self.dft_helper(n)
         self.post_visit(v)
 
     def bft_helper(self, v):
-        Q = Queue(self.node_count())
+        Q = Queue()
         Q.enqueue(v)
         self.set_value(v, Visited.VISITED)
         while Q.length() > 0:
             v = Q.dequeue()
             self.pre_visit(v)
-            for n in self.neighbors(v):
+            for n in sorted(self.neighbors(v)):
                 if self.get_value(n) != Visited.VISITED:
                     Q.enqueue(n)
                     self.set_value(n, Visited.VISITED)
@@ -85,11 +85,8 @@ class Graph:
     # Visit methods
     def pre_visit(self, v):
         print(v, end=' ')
-        # self.set_value(v, Visited.UNVISITED)
 
     def post_visit(self, v):
-        # self.set_value(v, Visited.VISITED)
-        # print(v, end=' ')
         pass
 
     # Additional methods
@@ -105,15 +102,6 @@ class Graph:
     def neighbors(self, v):
         return self.graph_list[v]
 
-    # Debuggers
-    def print_matrix(self):
-        for row in self.graph_matrix:
-            print(row)
-        print()
-
-    def does_edge_exist(self, u, v):
-        return self.graph_matrix[u][v] == 1
-
 
 if __name__ == "__main__":
     graph = Graph(6)
@@ -122,7 +110,6 @@ if __name__ == "__main__":
              (3, 5), (4, 5), (5, 1))
     for u, v in edges:
         graph.add(u, v)
-        graph.print_matrix()
 
     graph.dft(0)           # 0 2 1 5 3 4
     graph.bft(0)           # 0 2 3 4 1 5
