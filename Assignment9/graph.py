@@ -114,25 +114,18 @@ if __name__ == "__main__":
 
     graph.print_matrix()
 
-    edges = ((1, 2), (2, 1))
-    # ((0, 2), (0, 4), (2, 1),
-    # (2, 3), (2, 5), (3, 0),
-    # (3, 5), (4, 5), (5, 1))
+    edges = ((0, 2), (0, 4), (2, 1),
+             (2, 3), (2, 5), (3, 0),
+             (3, 5), (4, 5), (5, 1))
     for u, v in edges:
         graph.add(u, v)
 
-    graph.print_matrix()
-    # graph.dft(0)           # 0 2 1 5 3 4
-    # graph.bft(0)           # 0 2 3 4 1 5
+    graph.dft(0)           # 0 2 1 5 3 4
+    graph.bft(0)           # 0 2 3 4 1 5
 
-    graph.remove(1, 2)
-    graph.print_matrix()
+    graph.remove(0, 2)
+    graph.remove(2, 5)
+    graph.remove(1, 4)
 
-    graph.add(1, 1)
-    graph.print_matrix()
-    # graph.remove(0, 2)
-    # graph.remove(2, 5)
-    # graph.remove(1, 4)
-
-    # graph.dft(0)           # 0 3 2 1 5 4
-    # graph.bft(0)           # 0 3 4 2 5 1
+    graph.dft(0)           # 0 3 2 1 5 4
+    graph.bft(0)           # 0 3 4 2 5 1
