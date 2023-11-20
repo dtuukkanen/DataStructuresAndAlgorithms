@@ -38,11 +38,9 @@ class Graph:
         self.graph_matrix[u][v] = 0
         self.graph_matrix[v][u] = 0
 
-        try:
+        if v in self.graph_list[u] and u in self.graph_list[v]:
             self.graph_list[u].remove(v)
             self.graph_list[v].remove(u)
-        except ValueError:
-            pass
 
     def dft(self, start):
         for v in range(self.node_count()):  # Initialize
