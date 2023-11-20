@@ -31,8 +31,10 @@ class Graph:
         self.graph_matrix[u][v] = 1
         self.graph_matrix[v][u] = 1
 
-        self.graph_list[u].append(v)
-        self.graph_list[v].append(u)
+        if v not in self.graph_list[u]:
+            self.graph_list[u].append(v)
+        if u not in self.graph_list[v]:
+            self.graph_list[v].append(u)
 
     def remove(self, u, v):
         self.graph_matrix[u][v] = 0
@@ -100,21 +102,37 @@ class Graph:
     def neighbors(self, v):
         return self.graph_list[v]
 
+    # Debuggers
+    def print_matrix(self):
+        for row in self.graph_matrix:
+            print(row)
+        print()
+
 
 if __name__ == "__main__":
     graph = Graph(6)
-    edges = ((0, 2), (0, 4), (2, 1),
-             (2, 3), (2, 5), (3, 0),
-             (3, 5), (4, 5), (5, 1))
+
+    graph.print_matrix()
+
+    edges = ((1, 2), (2, 1))
+    # ((0, 2), (0, 4), (2, 1),
+    # (2, 3), (2, 5), (3, 0),
+    # (3, 5), (4, 5), (5, 1))
     for u, v in edges:
         graph.add(u, v)
 
-    graph.dft(0)           # 0 2 1 5 3 4
-    graph.bft(0)           # 0 2 3 4 1 5
+    graph.print_matrix()
+    # graph.dft(0)           # 0 2 1 5 3 4
+    # graph.bft(0)           # 0 2 3 4 1 5
 
-    graph.remove(0, 2)
-    graph.remove(2, 5)
-    graph.remove(1, 4)
+    graph.remove(1, 2)
+    graph.print_matrix()
 
-    graph.dft(0)           # 0 3 2 1 5 4
-    graph.bft(0)           # 0 3 4 2 5 1
+    graph.add(1, 1)
+    graph.print_matrix()
+    # graph.remove(0, 2)
+    # graph.remove(2, 5)
+    # graph.remove(1, 4)
+
+    # graph.dft(0)           # 0 3 2 1 5 4
+    # graph.bft(0)           # 0 3 4 2 5 1
