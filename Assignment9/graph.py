@@ -111,9 +111,6 @@ class Graph:
 
 if __name__ == "__main__":
     graph = Graph(6)
-
-    graph.print_matrix()
-
     edges = ((0, 2), (0, 4), (2, 1),
              (2, 3), (2, 5), (3, 0),
              (3, 5), (4, 5), (5, 1))
