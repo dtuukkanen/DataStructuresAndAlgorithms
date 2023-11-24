@@ -102,12 +102,6 @@ class Graph:
     def neighbors(self, v):
         return self.graph_list[v]
 
-    # Debuggers
-    def print_matrix(self):
-        for row in self.graph_matrix:
-            print(row)
-        print()
-
 
 if __name__ == "__main__":
     graph = Graph(6)
