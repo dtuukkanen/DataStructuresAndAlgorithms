@@ -54,7 +54,9 @@ class Graph:
             if D[v] == inf:
                 break  # Unreachable
             for w in self.neighbors(v):
-                if self.value[w] == Visited.UNVISITED and D[w] > D[v] + self.weight(v, w):
+                if self.value[w] == Visited.UNVISITED and D[w] > D[v] + self.weight(
+                    v, w
+                ):
                     D[w] = D[v] + self.weight(v, w)
                     self.predecessor[w] = v
 
@@ -89,18 +91,31 @@ class Graph:
 
 
 if __name__ == "__main__":
-
     graph = Graph(10)
-    edges = ((0, 1, 25), (0, 2,  6), (1, 3, 10),
-             (1, 4,  3), (2, 3,  7), (2, 5, 25),
-             (3, 4, 12), (3, 5, 15), (3, 6,  4),
-             (3, 7, 15), (3, 8, 20), (4, 7,  2),
-             (5, 8,  2), (6, 7,  8), (6, 8, 13),
-             (6, 9, 15), (7, 9,  5), (8, 9,  1))
+    edges = (
+        (0, 1, 25),
+        (0, 2, 6),
+        (1, 3, 10),
+        (1, 4, 3),
+        (2, 3, 7),
+        (2, 5, 25),
+        (3, 4, 12),
+        (3, 5, 15),
+        (3, 6, 4),
+        (3, 7, 15),
+        (3, 8, 20),
+        (4, 7, 2),
+        (5, 8, 2),
+        (6, 7, 8),
+        (6, 8, 13),
+        (6, 9, 15),
+        (7, 9, 5),
+        (8, 9, 1),
+    )
     for u, v, w in edges:
         graph.add(u, v, w)
 
-    graph.shortest_path(0, 9)   # 0 2 3 6 7 9
+    graph.shortest_path(0, 9)  # 0 2 3 6 7 9
     graph.remove(3, 6)
     graph.remove(5, 6)
-    graph.shortest_path(0, 9)   # 0 2 3 5 8 9
+    graph.shortest_path(0, 9)  # 0 2 3 5 8 9

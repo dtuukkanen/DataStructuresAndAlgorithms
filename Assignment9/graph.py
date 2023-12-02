@@ -84,7 +84,7 @@ class Graph:
 
     # Visit methods
     def pre_visit(self, v):
-        print(v, end=' ')
+        print(v, end=" ")
 
     def post_visit(self, v):
         pass
@@ -105,18 +105,16 @@ class Graph:
 
 if __name__ == "__main__":
     graph = Graph(6)
-    edges = ((0, 2), (0, 4), (2, 1),
-             (2, 3), (2, 5), (3, 0),
-             (3, 5), (4, 5), (5, 1))
+    edges = ((0, 2), (0, 4), (2, 1), (2, 3), (2, 5), (3, 0), (3, 5), (4, 5), (5, 1))
     for u, v in edges:
         graph.add(u, v)
 
-    graph.dft(0)           # 0 2 1 5 3 4
-    graph.bft(0)           # 0 2 3 4 1 5
+    graph.dft(0)  # 0 2 1 5 3 4
+    graph.bft(0)  # 0 2 3 4 1 5
 
     graph.remove(0, 2)
     graph.remove(2, 5)
     graph.remove(1, 4)
 
-    graph.dft(0)           # 0 3 2 1 5 4
-    graph.bft(0)           # 0 3 4 2 5 1
+    graph.dft(0)  # 0 3 2 1 5 4
+    graph.bft(0)  # 0 3 4 2 5 1

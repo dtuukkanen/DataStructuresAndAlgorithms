@@ -1,8 +1,8 @@
 # I used heapq library as part of the solution to this assignment.
 # https://github.com/python/cpython/blob/3.12/Lib/heapq.py#L275
 
-class MinHeap:
 
+class MinHeap:
     # Initialization
     def __init__(self, list):
         self.heap = self.__heapify(list)
@@ -18,7 +18,7 @@ class MinHeap:
         startpos = pos
         newitem = heap[pos]
         # Bubble up the smaller child until hitting a leaf.
-        childpos = 2*pos + 1    # leftmost child position
+        childpos = 2 * pos + 1  # leftmost child position
         while childpos < endpos:
             # Set childpos to index of smaller child.
             rightpos = childpos + 1
@@ -27,7 +27,7 @@ class MinHeap:
             # Move the smaller child up.
             heap[pos] = heap[childpos]
             pos = childpos
-            childpos = 2*pos + 1
+            childpos = 2 * pos + 1
         # The leaf at pos is empty now.  Put newitem there, and bubble it up
         # to its final resting place (by sifting its parents down).
         heap[pos] = newitem
@@ -69,7 +69,7 @@ class MinHeap:
 
 if __name__ == "__main__":
     heap = MinHeap([4, 8, 6, 5, 1, 2, 3])
-    heap.print()        # 1 4 2 5 8 6 3
-    print(heap.pop())   # 1
+    heap.print()  # 1 4 2 5 8 6 3
+    print(heap.pop())  # 1
     heap.push(9)
-    heap.print()        # 2 4 3 5 8 6 9
+    heap.print()  # 2 4 3 5 8 6 9

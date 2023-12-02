@@ -2,6 +2,7 @@
 # Reasons for this is that there isn't any good material to go through this online.
 # Also normal NQueen is rated as hard in Leetcode and with MQueens it would atleast be extreme.
 
+
 def is_safe(board, row, col, n, left_row, lower_diag, upper_diag):
     return not (left_row[row] or lower_diag[row + col] or upper_diag[n - 1 + col - row])
 
@@ -19,15 +20,17 @@ def solve_nq_util(n, m, board, col, placed, left_row, lower_diag, upper_diag):
             lower_diag[i + col] = True
             upper_diag[n - 1 + col - i] = True
 
-            solutions += solve_nq_util(n, m, board, col + 1,
-                                       placed + 1, left_row, lower_diag, upper_diag)
+            solutions += solve_nq_util(
+                n, m, board, col + 1, placed + 1, left_row, lower_diag, upper_diag
+            )
 
             board[i][col] = 0
             left_row[i] = False
             lower_diag[i + col] = False
             upper_diag[n - 1 + col - i] = False
-    solutions += solve_nq_util(n, m, board, col + 1,
-                               placed, left_row, lower_diag, upper_diag)
+    solutions += solve_nq_util(
+        n, m, board, col + 1, placed, left_row, lower_diag, upper_diag
+    )
     return solutions
 
 

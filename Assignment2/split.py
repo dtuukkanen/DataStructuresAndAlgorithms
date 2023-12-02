@@ -9,7 +9,7 @@ def split(T):
         left_max[i] = current_max
 
     # Calculate the minimum on the right side
-    right_min = float('inf')
+    right_min = float("inf")
     counter = 0
     for i in range(array_size - 1, 0, -1):
         right_min = min(right_min, T[i])
@@ -20,7 +20,7 @@ def split(T):
 
 
 if __name__ == "__main__":
-    print(split([1, 2, 3, 4, 5]))       # 4
-    print(split([5, 4, 3, 2, 1]))       # 0
-    print(split([2, 1, 2, 5, 7, 6, 9]))   # 3
-    print(split([1, 2, 3, 1]))         # 0
+    print(split([1, 2, 3, 4, 5]))  # 4
+    print(split([5, 4, 3, 2, 1]))  # 0
+    print(split([2, 1, 2, 5, 7, 6, 9]))  # 3
+    print(split([1, 2, 3, 1]))  # 0

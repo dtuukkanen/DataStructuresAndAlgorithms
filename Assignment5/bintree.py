@@ -206,13 +206,13 @@ if __name__ == "__main__":
     for key in keys:
         Tree.insert(key)
 
-    Tree.preorder()         # 5 1 3 2 4 9 7 6
+    Tree.preorder()  # 5 1 3 2 4 9 7 6
     Tree.mirror()
-    Tree.preorder()         # 5 9 7 6 1 3 4 2
+    Tree.preorder()  # 5 9 7 6 1 3 4 2
 
     Tree.insert(8)
     Tree.remove(3)
-    print(Tree.search(2))   # True
-    Tree.preorder()         # 5 9 7 8 6 1 2 4
+    print(Tree.search(2))  # True
+    Tree.preorder()  # 5 9 7 8 6 1 2 4
     Tree.mirror()
-    Tree.preorder()         # 5 1 2 4 9 7 6 8
+    Tree.preorder()  # 5 1 2 4 9 7 6 8

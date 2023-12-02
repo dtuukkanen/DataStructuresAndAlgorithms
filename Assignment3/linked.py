@@ -38,7 +38,7 @@ class LinkedList:
                 current = current.link
             next = current.link  # Save the next node
             current.link = new_node  # Insert the new node
-            new_node.link = next    # Link the new node to the next node
+            new_node.link = next  # Link the new node to the next node
 
     def delete(self, i):
         current = self.linkedList
@@ -56,23 +56,23 @@ class LinkedList:
                     return None
                 current = current.link
             # Forget the ith node by linking the i-1th node to the i+1th node
-            if current.link is None:    # If node doesn't exist
+            if current.link is None:  # If node doesn't exist
                 return None
             removed = current.link.data
-            current.link = current.link.link    # Skip node in between
+            current.link = current.link.link  # Skip node in between
         return removed  # Return data from index
 
     def print(self):
         current = self.linkedList
-        print(current.data, end='')
+        print(current.data, end="")
         while current.link != None:
             current = current.link
-            print(' ->', current.data, end='')
+            print(" ->", current.data, end="")
         print()
 
     def index(self, data):
         current = self.linkedList
-        i = 0   # Start at 0
+        i = 0  # Start at 0
 
         while current is not None:
             if current.data == data:
@@ -133,6 +133,6 @@ if __name__ == "__main__":
     L = LinkedList()
     for num in (3, 5, 2, 7, 8, 10, 6):
         L.append(num)
-    L.print()   # 3 -> 5 -> 2 -> 7 -> 8 -> 10 -> 6
+    L.print()  # 3 -> 5 -> 2 -> 7 -> 8 -> 10 -> 6
     L.isort()
-    L.print()   # 2 -> 3 -> 5 -> 6 -> 7 -> 8 -> 10
+    L.print()  # 2 -> 3 -> 5 -> 6 -> 7 -> 8 -> 10

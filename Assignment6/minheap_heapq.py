@@ -2,7 +2,6 @@ import heapq
 
 
 class MinHeap:
-
     # Initialization
     def __init__(self, list):
         self.heap = list
@@ -23,7 +22,7 @@ class MinHeap:
 
 if __name__ == "__main__":
     heap = MinHeap([4, 8, 6, 5, 1, 2, 3])
-    heap.print()        # 1 4 2 5 8 6 3
-    print(heap.pop())   # 1
+    heap.print()  # 1 4 2 5 8 6 3
+    print(heap.pop())  # 1
     heap.push(9)
-    heap.print()        # 2 4 3 5 8 6 9
+    heap.print()  # 2 4 3 5 8 6 9

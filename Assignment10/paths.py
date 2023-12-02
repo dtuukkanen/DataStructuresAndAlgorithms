@@ -55,13 +55,8 @@ class Graph:
         for k in range(self.n):
             for i in range(self.n):
                 for j in range(self.n):
-                    if (self.distances[i][k] != math.inf and
-                                self.distances[k][j] != math.inf and
-                                self.distances[i][j] > self.distances[i][k] +
-                            self.distances[k][j]
-                            ):
-                        self.distances[i][j] = self.distances[i][k] + \
-                            self.distances[k][j]
+                    if (self.distances[i][k] != math.inf and self.distances[k][j] != math.inf and self.distances[i][j] > self.distances[i][k] + self.distances[k][j]):
+                        self.distances[i][j] = self.distances[i][k] + self.distances[k][j]
 
     # Return weight of edge (u, v)
     def weight(self, u, v):

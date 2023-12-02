@@ -42,16 +42,13 @@ class Graph:
 
 if __name__ == "__main__":
     graph = Graph(6)
-    edges = ((0, 4), (2, 1),
-             (2, 5), (3, 0),
-             (5, 1))
+    edges = ((0, 4), (2, 1), (2, 5), (3, 0), (5, 1))
     for u, v in edges:
         graph.add(u, v)
 
     print(graph.subgraphs())  # 2
 
-    more_connections = ((0, 2), (2, 3),
-                        (3, 5), (4, 5))
+    more_connections = ((0, 2), (2, 3), (3, 5), (4, 5))
     for u, v in more_connections:
         graph.add(u, v)
 
